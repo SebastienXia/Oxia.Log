@@ -1,31 +1,30 @@
-.conteneur_articles_sur_attaques{
+.conteneur{
     margin-top: 20px;
     width: 50%;
     text-align: left;
 }
-.conteneur_articles_sur_attaques h2{
+.conteneurh2{
     text-align: left;
     font-size: 1.5rem;
     font-weight: bold;
     color: rgb(49, 49, 49);
     margin-bottom: 20px;
 }
-.conteneur_articles_sur_attaques ul{
+.conteneur ul{
     list-style: none;
     padding: 0;
     padding-left: 50px;
 }
-.conteneur_articles_sur_attaques li{
+.conteneur li{
     margin-bottom: 10px;
 }
-.conteneur_articles_sur_attaques a{
+.conteneur a{
     text-decoration: none;
 }
-.conteneur_articles_sur_attaques a:hover{
+.conteneur a:hover{
     text-decoration: underline;
     color: rgb(49, 49, 49);
 }
-
 
 /* Mobile : seuil à adapter selon ton design */
 @media (max-width: 700px) {
