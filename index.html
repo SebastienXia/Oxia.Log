@@ -3,9 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_nav.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <header>
+        <div id="logo">Oxia.log</div>
+        <nav id="nav-desktop">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="nav-mobile" aria-hidden="true">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="conteneur_articles_sur_attaques">
+        <h2>Articles sur les attaques</h2>
+
+        <div class="article_attack">
+            <ul>
+                <li><a href="./articles/kerberoasting.html">Kerberoasting : Une méthode d'attaque sur les tickets Kerberos</a></li>
+                <li><a href="./articles/as_rep_roasting.html">AS-REP Roasting : Une méthode d'attaque sur les tickets AS-REP</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <script>
+        const btn = document.getElementById('hamburger');
+        const menu = document.getElementById('nav-mobile');
+
+        btn.addEventListener('click', () => {
+            const isOpen = menu.classList.contains('open');
+
+            if (isOpen) {
+                menu.style.opacity = '0';
+                setTimeout(() => {
+                    menu.classList.remove('open');
+                    menu.style.display = 'none';
+                }, 250);
+            } else {
+                menu.classList.add('open');
+                menu.style.display = 'block';
+                requestAnimationFrame(() => {
+                    menu.style.opacity = '1';
+                });
+            }
+
+            btn.setAttribute('aria-expanded', !isOpen);
+            menu.setAttribute('aria-hidden', isOpen);
+        });
+    </script>
 </body>
 </html>

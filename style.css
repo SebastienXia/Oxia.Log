@@ -1,0 +1,56 @@
+.conteneur_articles_sur_attaques{
+    margin-top: 20px;
+    width: 50%;
+    text-align: left;
+}
+.conteneur_articles_sur_attaques h2{
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(49, 49, 49);
+    margin-bottom: 20px;
+}
+.conteneur_articles_sur_attaques ul{
+    list-style: none;
+    padding: 0;
+    padding-left: 50px;
+}
+.conteneur_articles_sur_attaques li{
+    margin-bottom: 10px;
+}
+.conteneur_articles_sur_attaques a{
+    text-decoration: none;
+}
+.conteneur_articles_sur_attaques a:hover{
+    text-decoration: underline;
+    color: rgb(49, 49, 49);
+}
+
+
+/* Mobile : seuil à adapter selon ton design */
+@media (max-width: 700px) {
+    header {
+        width: 90%; /* S'élargit sur petit écran pour utiliser l'espace disponible */
+    }
+
+    #nav-desktop {
+        display: none;
+    }
+
+    #hamburger {
+        display: flex;
+    }
+
+    .conteneur_articles_sur_attaques{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+    .conteneur_articles_sur_attaques h2{
+        font-size: 1.2rem;
+    }
+    .conteneur_articles_sur_attaques p{
+        font-size: 0.9rem;
+    }
+}

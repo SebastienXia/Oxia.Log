@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permet au menu mobile de passer à la ligne */
+    width: 50%;
+    border-bottom: 1px solid rgb(49, 49, 49);
+    margin: 20px 0px 0px 0px;
+    padding: 10px 0px 10px 0px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    padding: 0; /* Optionnel : enlève le padding par défaut des listes */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: rgb(49, 49, 49);
+    font-weight: bold;
+}
+
+#logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(49, 49, 49);
+}
+
+/* Hamburger button */
+#hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+#hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: rgb(49, 49, 49);
+    transition: opacity 0.2s;
+}
+
+/* Nav mobile */
+#nav-mobile {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    width: 100%; /* Prend toute la largeur pour passer sous le logo/bouton */
+    text-align: center; /* Centre les liens sur mobile pour faire plus joli */
+}
+
+#nav-mobile.open {
+    display: block;
+    opacity: 1;
+}
+
+#nav-mobile ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 1rem 0;
+}
+
+/* Mobile : seuil à adapter selon ton design */
+@media (max-width: 700px) {
+    header {
+        width: 90%; /* S'élargit sur petit écran pour utiliser l'espace disponible */
+    }
+
+    #nav-desktop {
+        display: none;
+    }
+
+    #hamburger {
+        display: flex;
+    }
+}
