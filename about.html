@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_nav.css">
+    <link rel="stylesheet" href="css/as_rep_roasting.css">
+    <title>Oxia.Log - À propos</title>
+</head>
+<body>
+    <header>
+        <div id="logo"><a href="index.html">Oxia.log</a></div>
+        <nav id="nav-desktop">
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="nav-mobile" aria-hidden="true">
+            <ul>
+                <li><a href="about.html ">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div>
+        <h1>À propos</h1>
+        <p>Bienvenue sur mon blog ! Je suis un passionné de cybersécurité et je partage mes connaissances avec vous.</p>
+        <p>Étudiant en Informatique Fondamentale à l'Université de Paris en 2ième année (2026/2027).</p>
+        <h2>Réussite</h2>
+        <ul>
+            <li>Obtention de la Certification Comptia Security+ (2026) <a href="https://www.credly.com/badges/63beb412-b6c5-4dbb-8579-cd1ca068a796/public_url" target="_blank" rel="noopener noreferrer">Credly</a> - <a href="https://www.comptia.org/en/certifications/security/" target="_blank" rel="noopener noreferrer">CompTIA Security+ ?</a></li> 
+        </ul>
+    </div>
+
+    <script>
+        const btn = document.getElementById('hamburger');
+        const menu = document.getElementById('nav-mobile');
+
+        btn.addEventListener('click', () => {
+            const isOpen = menu.classList.contains('open');
+
+            if (isOpen) {
+                menu.style.opacity = '0';
+                setTimeout(() => {
+                    menu.classList.remove('open');
+                    menu.style.display = 'none';
+                }, 250);
+            } else {
+                menu.classList.add('open');
+                menu.style.display = 'block';
+                requestAnimationFrame(() => {
+                    menu.style.opacity = '1';
+                });
+            }
+
+            btn.setAttribute('aria-expanded', !isOpen);
+            menu.setAttribute('aria-hidden', isOpen);
+        });
+    </script>    
+</body>
+</html>

@@ -36,6 +36,10 @@ nav ul li a {
     font-weight: bold;
     color: rgb(49, 49, 49);
 }
+#logo a {
+    text-decoration: none;
+    color: rgb(49, 49, 49);
+}
 
 /* Hamburger button */
 #hamburger {
