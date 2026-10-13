@@ -1,0 +1,36 @@
+.content {
+    width: 50%;
+}
+.imagesIP, .imagesKali{
+    display: flex;
+    justify-content: center;
+}
+.imagesIP a, .imagesKali a {
+    margin: 10px;
+}
+img {
+    margin: 10px;
+    scale: 0.95;
+    transition: scale 0.3s ease-in-out;
+}
+img:hover {
+    scale: 1;
+}
+code {
+    display: block;
+    width: 100%;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto; /* Ajouté pour permettre le défilement horizontal si nécessaire */
+}
+
+@media (max-width: 700px) {
+    .imagesIP, .imagesKali {
+        flex-direction: column;
+        align-items: center;
+    }
+    img {
+        scale: 1;
+    }
+}

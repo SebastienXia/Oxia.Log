@@ -1,9 +1,9 @@
 .conteneur{
-    margin-top: 20px;
+    margin-top: 15px;
     width: 50%;
     text-align: left;
 }
-.conteneurh2{
+.conteneur h2{
     text-align: left;
     font-size: 1.5rem;
     font-weight: bold;
@@ -13,7 +13,7 @@
 .conteneur ul{
     list-style: none;
     padding: 0;
-    padding-left: 50px;
+    padding-left: 30px;
 }
 .conteneur li{
     margin-bottom: 10px;
