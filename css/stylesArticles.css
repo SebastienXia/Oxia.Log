@@ -1,11 +1,11 @@
 .content {
     width: 50%;
 }
-.imagesIP, .imagesKali{
+.imagesIP, .imagesKali, .imagesWD{
     display: flex;
     justify-content: center;
 }
-.imagesIP a, .imagesKali a {
+.imagesIP a, .imagesKali a, .imagesWD a {
     margin: 10px;
 }
 img {
@@ -26,7 +26,7 @@ code {
 }
 
 @media (max-width: 700px) {
-    .imagesIP, .imagesKali {
+    .imagesIP, .imagesKali, .imagesWD{
         flex-direction: column;
         align-items: center;
     }

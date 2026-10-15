@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style_nav.css">
-    <link rel="stylesheet" href="../css/as_rep_roasting.css">
+    <link rel="stylesheet" href="../css/stylesArticles.css">
     <title>Oxia.Log - AS-REP Roasting</title>
 </head>
 <body>
@@ -30,7 +30,56 @@
     </header>
 
     <div class="content">
-
+        <h1>AS-REP Roasting</h1>
+        <p>AS-REP Roasting est une technique d'attaque utilisée dans les environnements Windows Domain. Elle consiste à extraire les réponses AS-REP des comptes d'utilisateurs d'Active Directory et les déchiffrer pour obtenir les mots de passe en clair. Dans le même esprit que le <a href="kerberoasting.html">Kerberoasting</a>, cette technique permet à un attaquant d'obtenir les mots de passe en clair de comptes d'utilisateurs, ce qui peut lui donner un accès privilégié au système.</p>
+        <p>Pour effectuer un AS-REP Roasting, un attaquant doit d'abord obtenir une réponse AS-REP pour un compte d'utilisateur. Cela peut être fait en utilisant des outils tels que <b>Mimikatz</b> ou <b><a href="https://www.kali.org/tools/rubeus/" target="_blank" rel="noopener noreferrer">Rubeus</a></b> ou encore <b><a href="https://www.kali.org/tools/impacket/" target="_blank" rel="noopener noreferrer">Impacket</a></b> ici utilisé. Une fois que l'attaquant a la réponse, il peut l'extraire et la déchiffrer pour obtenir le mot de passe en clair du compte d'utilisateur.</p>
+        <h2>Simulation (HomeLab)</h2>
+        <p>Dans le cadre de mon HomeLab, j'ai simulé un AS-REP Roasting en utilisant un compte d'utilisateur avec un mot de passe faible. J'ai utilisé l'outil Impacket pour obtenir la réponse AS-REP et l'extraire. Ensuite, j'ai utilisé un outil de déchiffrement pour obtenir le mot de passe en clair du compte d'utilisateur.</p>
+        <h3>Composition du HomeLab</h3>
+        <ul>
+            <li>Un contrôleur de domaine Windows Server 2019</li>
+            <li>Un compte d'utilisateur avec un mot de passe faible (eliot:Passwd123!)</li>
+            <li>Un attaquant avec un système Kali Linux</li>
+        </ul>
+        <p>IP VM Windows Server 2019 : <b>192.168.10.10/24</b> et IP VM Kali Linux : <b>192.168.10.20/24</b></p>
+        <div class="imagesIP">
+            <a href="../assets/kerberoasting/kali-linux/ip_add_kali_linux.png" target="_blank" rel="noopener noreferrer"><img src="../assets/kerberoasting/kali-linux/ip_add_kali_linux.png" alt="Kali Linux IP Address" style="width: 100%; max-width: 600px;"></a>
+            <a href="../assets/kerberoasting/windows-server-2019/windows_server_ipconfig.png" target="_blank" rel="noopener noreferrer"><img src="../assets/kerberoasting/windows-server-2019/windows_server_ipconfig.png" alt="Windows Server 2019 IP Config" style="width: 100%; max-width: 600px;"></a>
+        </div>
+        <h3>Étape de la simulation sur Windows Server 2019</h3>
+        <ol>
+            <li>Création de l'utilisateur eliot avec le mot de passe Passwd123!</li>
+            <div class="imagesWD">
+                <a href="../assets/as_rep_roasting/Windows_server2019/creation_user_eliot_anonymous.png" target="_blank" rel="noopener noreferrer"><img src="../assets/as_rep_roasting/Windows_server2019/creation_user_eliot_anonymous.png" alt="Création Utilisateur eliot" style="width: 100%; max-width: 600px; margin:10px"></a>
+                <a href="../assets/as_rep_roasting/Windows_server2019/creation_mdp_eliot.png" target="_blank" rel="noopener noreferrer"><img src="../assets/as_rep_roasting/Windows_server2019/creation_mdp_eliot.png" alt="Création Mot de passe eliot" style="width: 100%; max-width: 600px; margin:10px"></a>
+            </div>
+            <li>Modification de la propriété "Do not require Kerberos authentication" pour l'utilisateur eliot : Propriétés > Compte > Options de compte > cocher La pré-authentification Kerberos n'est pas nécessaire</li>
+            <a href="../assets/as_rep_roasting/Windows_server2019/modification_propriete.png" target="_blank" rel="noopener noreferrer"><img src="../assets/as_rep_roasting/Windows_server2019/modification_propriete.png" alt="Modification Propriété eliot" style="width: 100%; max-width: 600px; margin:10px"></a>
+        </ol>
+        <p>Tout est configuré pour effectuer l'attaque AS-REP Roasting.</p>
+        <h2>Étapes de l'attaque</h2>
+        <ol>
+            <li>Exécution de la commande <pre><code>impacket-GetNPUsers lab.local/eanonymous -no-pass -format hashcat -dc-ip 192.168.10.10</code></pre></li>
+            <ul>
+                <li>La commande récupère le hash AS-REP de l'utilisateur eanonymous, car la machine Kali demande un ticket TGT au contrôleur de domaine, et ce dernier le renvoie avec une portion chiffrée sans exiger la pré-authentification.</li>
+            </ul>
+            <a href="../assets/as_rep_roasting/Kali_linux/command.png" target="_blank" rel="noopener noreferrer"><img src="../assets/as_rep_roasting/Kali_linux/command.png" alt="Commande Kali" style="width: 100%; max-width: 600px; margin:10px"></a>
+            <p>Comme vous pouvez le constatez, le hash AS-REP a été récupéré avec succès. Avec le symbole 23$ pour indiquer que c'est un hash AS-REP.</p>
+            <li>Exécution de la commande <pre><code>hashcat -m 18000 -a 0 asrephash.txt </code></pre></li>
+            <div class="imagesKali">
+                <a href="../assets/as_rep_roasting/Kali_linux/dehash.png" target="_blank" rel="noopener noreferrer"><img src="../assets/as_rep_roasting/Kali_linux/dehash.png" alt="Hashcat Kali" style="width: 100%; max-width: 600px; margin:10px"></a>
+                <a href="../assets/as_rep_roasting/Kali_linux/dehash2.png" target="_blank" rel="noopener noreferrer"><img src="../assets/as_rep_roasting/Kali_linux/dehash2.png" alt="Hashcat Cracked Kali" style="width: 100%; max-width: 600px; margin:10px"></a>
+            </div>
+        </ol>
+        <h2>Analyse</h2>
+        <p>Nous pouvons voir dans Event Viewer que le hash AS-REP a été récupéré avec succès. Avec le code d'événement 4768.</p>
+        <div class="imagesWD">
+            <a href="../assets/as_rep_roasting/Windows_server2019/log1.png" target="_blank" rel="noopener noreferrer"><img src="../assets/as_rep_roasting/Windows_server2019/log1.png" alt="Event Viewer" style="width: 100%; max-width: 600px; margin:10px"></a>
+            <a href="../assets/as_rep_roasting/Windows_server2019/log2.png" target="_blank" rel="noopener noreferrer"><img src="../assets/as_rep_roasting/Windows_server2019/log2.png" alt="Event Viewer" style="width: 100%; max-width: 600px; margin:10px"></a>
+        </div>
+        <p>Nous pouvons constater que la demande de ticket d'authentification Kerberos (TGT) a été demandé (ici par l'attaquand à l'adresse IP 192.168.10.20) et bien sûr la rétrogradation du chiffrement avec impacket 0x17 au lieu de 0x12</p>
+        <h2>Conclusion</h2>
+        <p>Le roasting AS-REP est une technique d'attaque qui consiste à récupérer le hash AS-REP d'un utilisateur non pré-authentifié. Cette vulnérabilité peut être exploitée pour effectuer des attaques de type "password spraying" ou "brute force" (off-line) sur le hash récupéré. Comment s'en protéger ? Vérifier les paramètres de sécurité du domaine et désactiver l'option "Do not require Kerberos pre-authentication" pour les comptes d'utilisateurs et vérifier que la Politique de mot de passe est configurée.</p>
     </div>
 
     <footer>
