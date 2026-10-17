@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+main {
+    font-family: Arial, sans-serif;
+    width: 50%;
+    max-width: 900px;
+    margin: 20px auto;
+    line-height: 1.5;
+}
+main h1 {
+    text-align: center;
+    text-decoration: underline;
+    margin: 40px 0;
+}
+h1 + h2 {
+    text-align: center;
+    margin: 20px 0;
+}
+#haut_info {
+    margin: 20px 0 0 0;
+    padding: 0;
+}
+.info {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.info p {
+    margin: 5px 0;
+}
+main li {
+    margin-bottom: 6px;
+}
+.note {
+    font-style: italic;
+    color: #555;
+}
+figure {
+    margin: 20px 0;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+figcaption {
+    text-align: center;
+    font-style: italic;
+    margin-top: 8px;
+}
+code {
+    background-color: #e8e8e8;
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+@media (max-width: 800px) {
+    main {
+        width: auto;
+        margin: 20px 16px;
+    }
+}
